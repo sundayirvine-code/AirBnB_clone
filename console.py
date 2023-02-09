@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
         print("\033c", end="")
 
     def do_quit(self, args):
-        """Quit command to exit the program. 
+        """Quit command to exit the program.
         """
         return True
 
