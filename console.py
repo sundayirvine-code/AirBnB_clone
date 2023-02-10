@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# Script that implements a custom CLI for AirBnB project
+
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -10,12 +13,7 @@ class HBNBCommand(cmd.Cmd):
     """A simple Air BnB command-line interface."""
     
     prompt = '(hbnb) '
-        
-    def do_clear(self, args):
-        """Clear the terminal.
-        """
-        print("\033c", end="")
-        
+
     def do_quit(self, args):
         """Quit command to exit the program. 
         """
@@ -48,17 +46,16 @@ str: The instance id of the created object.
 """
         if not class_name:
             print('** class name missing **')
-            return
-        if class_name not in all_classes:
+            
+        elif class_name not in all_classes:
             print("** class doesn't exist **")
-            return
-
-        if class_name == 'BaseModel':
+            
+        elif class_name == 'BaseModel':
             base_object = BaseModel()
             base_object.save()
             print(base_object.id)
         
-        if class_name == 'User':
+        elif class_name == 'User':
             user_object = User()
             user_object.save()
             print(user_object.id)
@@ -81,13 +78,14 @@ str: The string representation of the instance.
             print("** class name missing **")
             return
         
-        if class_name not in all_classes:
+        elif class_name not in all_classes:
             print("** class doesn't exist **")
             return
         
-        if not id:
+        elif not id:
             print("** instance id missing **")
             return
+
         id = f"{class_name}.{id}"
         all_objs = storage.all()
         obj = all_objs.get(id, None)
@@ -160,6 +158,7 @@ List[str]: A list of string representations of all instances that match the clas
                 value.__str__() for key, value in all_objs.items()
                 if key.startswith(f"{class_name}.")
             ]
+
             if len(class_objects) == 0:
                 print("** no instance found **")
                 return
@@ -189,16 +188,7 @@ None
         argc =len(args)
         class_name, id, attribute_name, attribute_value = (args + [None, None, None, None])[:4]
 
-
-
-        # All other arguments should not be used
-        if argc > 4:
-            class_name = args[0]
-            id = args[1]
-            attribute_name = args[2]
-            attribute_value = args[3]
-
-        if argc == 0:
+        if not class_name:
             print("** class name missing **")
             return
         if class_name not in all_classes:
@@ -230,19 +220,12 @@ None
             return
 
         # Check if the attribute exists in the instance
-        attribute = getattr(obj, attribute_name, None)
-        if attribute:
-            # updating existing attribute
-            if attribute_name not in['id', 'created_at', 'updated_at']:
-                # get the type and then typecast the value to e stored
-                t = type(attribute)
-                setattr(obj, attribute_name, t(attribute_value))
-                storage.save()
-
-            # Unauthorised update
-            else:
-                print(f"Cant update {attribute_name}")
-                return
+        value = getattr(obj, attribute_name, None)
+        if value:
+            # get the type and then typecast the value to e stored
+            t = type(value)
+            setattr(obj, attribute_name, t(attribute_value))
+            storage.save()
 
         else:
             #creating new attribute
