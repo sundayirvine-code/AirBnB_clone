@@ -9,11 +9,6 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    def do_clear(self, args):
-        """Clear the terminal.
-        """
-        print("\033c", end="")
-
     def do_quit(self, args):
         """Quit command to exit the program.
         """
