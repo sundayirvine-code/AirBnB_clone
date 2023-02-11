@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 import time
 from models.user import User
+from models.__init__ import storage
 
 class TestUser(unittest.TestCase):
     def test_instance_creation(self):
@@ -79,6 +80,16 @@ class TestUser(unittest.TestCase):
         self.assertEqual(instance.password, 'password123')
         self.assertEqual(instance.first_name, 'John')
         self.assertEqual(instance.last_name, 'Doe')
+
+    def test_save_adds_to_storage(self):
+        """
+        if the save method is adding the instance to the storage object. 
+        """
+        instance = User()
+        instance.save()
+        key = f"{instance.__class__.__name__}.{instance.id}"
+        self.assertIn(key, storage._FileStorage__objects)
+        self.assertIs(storage._FileStorage__objects[key], instance)
 
 if __name__ == '__main__':
     unittest.main()
