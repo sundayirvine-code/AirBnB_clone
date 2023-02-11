@@ -9,7 +9,7 @@ class TestUser(unittest.TestCase):
         """
         Test that User creates an instance
         and that its attributes are of the correct type.
-        """
+        """       
         instance = User()
         self.assertIsInstance(instance, User)
         self.assertIsInstance(instance.created_at, datetime)
@@ -70,7 +70,7 @@ class TestUser(unittest.TestCase):
             'first_name': 'John',
             'last_name': 'Doe'
         }
-        instance = User(**key_value)
+        instance = User(**key_value) 
         self.assertIsInstance(instance, User)
         self.assertIsInstance(instance.email, str)
         self.assertIsInstance(instance.password, str)
@@ -89,6 +89,7 @@ class TestUser(unittest.TestCase):
         instance.save()
         key = f"{instance.__class__.__name__}.{instance.id}"
         self.assertIn(key, storage._FileStorage__objects)
+        self.assertIsInstance(storage._FileStorage__objects[key], User)
         self.assertIs(storage._FileStorage__objects[key], instance)
 
 if __name__ == '__main__':
