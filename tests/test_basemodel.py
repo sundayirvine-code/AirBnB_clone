@@ -50,6 +50,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(instance_dict["created_at"], str)
         self.assertEqual(instance_dict["__class__"], "BaseModel")
         
+    def test_instance_creation_with_kwargs(self):
+        """
+        Test that BaseModel creates an instance with kwargs
+        and that its attributes are of the correct type.
+        """
+        key_value = {
+            'first_name': 'John',
+            'last_name': 'Doe'
+        }
+        instance = BaseModel(**key_value)
+        self.assertIsInstance(instance, BaseModel)
+        self.assertIsInstance(instance.first_name, str)
+        self.assertIsInstance(instance.last_name, str)
+        self.assertEqual(instance.first_name, 'John')
+        self.assertEqual(instance.last_name, 'Doe')
 
 
 
