@@ -12,7 +12,15 @@ from models.review import Review
 from models.__init__ import storage
 import shlex
 
-all_classes = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'Review', 'State']
+class_map = {
+    'BaseModel': BaseModel,
+    'User': User,
+    'Place': Place,
+    'State': State,
+    'City': City,
+    'Amenity': Amenity,
+    'Review': Review,
+}
 
 class HBNBCommand(cmd.Cmd):
     """A simple Air BnB command-line interface."""
@@ -52,43 +60,13 @@ str: The instance id of the created object.
         if not class_name:
             print('** class name missing **')
             
-        elif class_name not in all_classes:
+        elif class_name not in class_map:
             print("** class doesn't exist **")
             
-        elif class_name == 'BaseModel':
-            base_object = BaseModel()
-            base_object.save()
-            print(base_object.id)
-        
-        elif class_name == 'User':
-            user_object = User()
-            user_object.save()
-            print(user_object.id)
-        
-        elif class_name == 'Place':
-            place_object = Place()
-            place_object.save()
-            print(place_object.id)
-
-        elif class_name == 'State':
-            state_object = State()
-            state_object.save()
-            print(state_object.id)
-
-        elif class_name == 'City':
-            city_object = City()
-            city_object.save()
-            print(city_object.id)
-
-        elif class_name == 'Amenity':
-            amenity_object = Amenity()
-            amenity_object.save()
-            print(amenity_object.id)
-
-        elif class_name == 'Review':
-            review_object = Review()
-            review_object.save()
-            print(review_object.id)
+        else:
+            obj = class_map[class_name]()
+            obj.save()
+            print(obj.id)
 
     def do_show(self, line):
         """Display string representation of an instance based on the class name and id.
@@ -108,7 +86,7 @@ str: The string representation of the instance.
             print("** class name missing **")
             return
         
-        elif class_name not in all_classes:
+        elif class_name not in class_map:
             print("** class doesn't exist **")
             return
         
@@ -143,7 +121,7 @@ None: Deletes the instance and saves the change in the JSON file.
             print("** class name missing **")
             return
         
-        if class_name not in all_classes:
+        if class_name not in class_map:
             print("** class doesn't exist **")
             return
         
@@ -181,7 +159,7 @@ List[str]: A list of string representations of all instances that match the clas
         
         #class_name provided
         if class_name:
-            if class_name not in all_classes:
+            if class_name not in class_map:
                 print("** class doesn't exist **")
                 return
             class_objects = [
@@ -221,7 +199,7 @@ None
         if not class_name:
             print("** class name missing **")
             return
-        if class_name not in all_classes:
+        if class_name not in class_map:
             print("** class doesn't exist **")
             return
 
