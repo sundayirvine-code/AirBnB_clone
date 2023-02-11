@@ -3,28 +3,45 @@ import os
 
 
 class FileStorage:
-    """Serializes JSON files into instances
-    and deserializes instances into JSON files
+    """Class for serializing and deserializing objects
+    to and from a JSON file.
+    
+    Attributes:
+        __file_path (str): The file path where the JSON data will be stored.
+        __objects (dict): A dictionary storing objects, with the keys being
+            formatted as '<class_name>.<id>'.
     """
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Returns the __objects attribute"""
+        """Returns the dictionary of objects stored in the __objects attribute.
 
+        Returns:
+            dict: The dictionary of objects.
+        """
         return FileStorage.__objects
 
     def new(self, obj):
-        """Sets in __objects the obj with key
-        <obj class name>.id"""
+        """Sets the given object in the __objects dictionary.
+
+        Args:
+            obj: The object to be added to the __objects dictionary.
+
+        Returns:
+            None
+        """
 
         key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """Serializes __objects to the JSON file (path: __file_path)"""
+        """Serializes the __objects dictionary to a JSON file.
 
+        Returns:
+            None
+        """
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
             objects_dict = {}
             for key, value in FileStorage.__objects.items():
@@ -32,10 +49,14 @@ class FileStorage:
             json.dump(objects_dict, f)
 
     def reload(self):
-        """Deserializes the JSON file to __objects(only
-        if the JSON file (__file_path) exists;
-        otherwise, do nothing. If the file doesn’t exist,
-        no exception should be raised)"""
+        """Deserializes the JSON file to the __objects dictionary.
+        
+        If the file doesn't exist, this method does nothing and no
+        exception is raised.
+
+        Returns:
+            None
+        """
 
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
