@@ -40,6 +40,7 @@ class FileStorage:
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 objects_dict = json.load(f)
+                
                 from models.base_model import BaseModel
                 from models.user import User
                 from models.place import Place
@@ -47,26 +48,20 @@ class FileStorage:
                 from models.city import City
                 from models.amenity import Amenity
                 from models.review import Review
+                
+                class_map = {
+                    "BaseModel": BaseModel,
+                    "User": User,
+                    "Place": Place,
+                    "State": State,
+                    "City": City,
+                    "Amenity": Amenity,
+                    "Review": Review
+                }
+
                 for key, value in objects_dict.items():
-                    if key.startswith("BaseModel"):
-                        obj = BaseModel(**value)
+                    class_name = key.split(".")[0]
+                    if class_name in class_map:
+                        obj = class_map[class_name](**value)
+                        FileStorage.__objects[key] = obj
 
-                    if key.startswith("User"):
-                        obj = User(**value)
-
-                    if key.startswith("Place"):
-                        obj = Place(**value)
-
-                    if key.startswith("State"):
-                        obj = State(**value)
-
-                    if key.startswith("City"):
-                        obj = City(**value)
-
-                    if key.startswith("Amenity"):
-                        obj = Amenity(**value)
-
-                    if key.startswith("Review"):
-                        obj = Review(**value)
-
-                    FileStorage.__objects[key] = obj
