@@ -162,15 +162,16 @@ List[str]: A list of string representations of all instances that match the clas
             if class_name not in class_map:
                 print("** class doesn't exist **")
                 return
-            class_objects = [
-                value.__str__() for key, value in all_objs.items()
-                if key.startswith(f"{class_name}.")
-            ]
+            else:
+                class_objects = [
+                    value.__str__() for key, value in all_objs.items()
+                    if key.startswith(f"{class_name}.")
+                ]
 
-            if len(class_objects) == 0:
-                print("** no instance found **")
-                return
-            print(class_objects)
+                if len(class_objects) == 0:
+                    print("** no instance found **")
+                    return
+                print(class_objects)
         
         # no argument provided
         else:
