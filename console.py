@@ -4,6 +4,11 @@
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models.__init__ import storage
 import shlex
 
@@ -59,6 +64,31 @@ str: The instance id of the created object.
             user_object = User()
             user_object.save()
             print(user_object.id)
+        
+        elif class_name == 'Place':
+            place_object = Place()
+            place_object.save()
+            print(place_object.id)
+
+        elif class_name == 'State':
+            state_object = State()
+            state_object.save()
+            print(state_object.id)
+
+        elif class_name == 'City':
+            city_object = City()
+            city_object.save()
+            print(city_object.id)
+
+        elif class_name == 'Amenity':
+            amenity_object = Amenity()
+            amenity_object.save()
+            print(amenity_object.id)
+
+        elif class_name == 'Review':
+            review_object = Review()
+            review_object.save()
+            print(review_object.id)
 
     def do_show(self, line):
         """Display string representation of an instance based on the class name and id.
