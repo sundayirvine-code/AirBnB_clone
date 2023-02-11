@@ -85,7 +85,11 @@ With the `reload` method, the file storage will attempt to deserialize the JSON 
 
 #### THE CONSOLE  
 We then create a custom  CLI for the AirBnB project, allowing users to interact with the program through a terminal.  
-It is located at `AirBnB_clone/console.py`.  
+It is located at `AirBnB_clone/console.py`.
+###### How to start it  
+While in the directory root `AirBnB` type `python console.py` to start up the CLI.  
+
+###### Usage  
 It implements several functionalities in the class `HBNBCommand` which is a subclass of `cmd.Cmd`. These functionalities include:
 - creating a new instance 
 - showing an instance 
@@ -93,8 +97,44 @@ It implements several functionalities in the class `HBNBCommand` which is a subc
 - displaying all instances.  
 
 The `do_create` method creates a new instance of a class and saves it.  
-The `do_show` method displays a string representation of an instance based on its class name and id.  
-The `do_destroy` method deletes an instance based on its class name and id.  
-The `do_all` method prints all string representations of instances, filtered by class name if provided.  
-The `do_update` method updates an instance with new attributes, or creates a new attribute if it doesn't exist.
+Example:  
+```
+(hbnb) create User
+65f7ffcb-2f5e-4153-b020-21476f715ac2
+(hbnb)
+```  
 
+The `do_show` method displays a string representation of an instance based on its class name and id.  
+Example:  
+```
+(hbnb) show User 65f7ffcb-2f5e-4153-b020-21476f715ac2
+[User] 65f7ffcb-2f5e-4153-b020-21476f715ac2 {'id': '65f7ffcb-2f5e-4153-b020-21476f715ac2', 'created_at': datetime.datetime(2023, 2, 11, 16, 55, 17, 162879), 'updated_at': datetime.datetime(2023, 2, 11, 16, 55, 17, 162879)}
+(hbnb)
+```  
+
+The `do_destroy` method deletes an instance based on its class name and id.  
+Example:  
+```
+(hbnb) destroy User 65f7ffcb-2f5e-4153-b020-21476f715ac2
+(hbnb) 
+```  
+
+The `do_all` method prints all string representations of instances, filtered by class name if provided.  
+Example:  
+```
+["[User] 1e86eedc-774a-48ef-87bd-4f437922b875 {'id': '1e86eedc-774a-48ef-87bd-4f437922b875', 'created_at': datetime.datetime(2023, 2, 11, 10, 45, 7, 14132), 'updated_at': datetime.datetime(2023, 2, 11, 10, 45, 7, 14132)}", "[User] cf4f279b-9d5e-45d1-8d8a-50c0e893b0e7 {'id': 'cf4f279b-9d5e-45d1-8d8a-50c0e893b0e7', 'created_at': datetime.datetime(2023, 2, 11, 11, 16, 22, 566800), 'updated_at': datetime.datetime(2023, 2, 11, 11, 16, 22, 566800)}"]
+```  
+or without class   
+```
+(hbnb) all
+["[BaseModel] fa6a1c07-2117-4dd1-9019-c5cbaf1a6f03 {'id': 'fa6a1c07-2117-4dd1-9019-c5cbaf1a6f03', 'created_at': datetime.datetime(2023, 2, 11, 10, 44, 46, 509581), 'updated_at': datetime.datetime(2023, 2, 11, 10, 44, 46, 509581)}", "[User] 1e86eedc-774a-48ef-87bd-4f437922b875 {'id': '1e86eedc-774a-48ef-87bd-4f437922b875', 'created_at': datetime.datetime(2023, 2, 11, 10, 45, 7, 14132), 'updated_at': datetime.datetime(2023, 2, 11, 10, 45, 7, 14132)}", "[Amenity] 4e393861-e21d-4bf0-8ff1-45b83fb02282 {'id': '4e393861-e21d-4bf0-8ff1-45b83fb02282', 'created_at': datetime.datetime(2023, 2, 11, 10, 45, 16, 60186), 'updated_at': datetime.datetime(2023, 2, 11, 10, 45, 16, 60186)}", "[Place] 74662458-80c3-4a63-8c4d-fd9fed13e374 {'id': '74662458-80c3-4a63-8c4d-fd9fed13e374', 'created_at': datetime.datetime(2023, 2, 11, 10, 46, 27, 541310), 'updated_at': datetime.datetime(2023, 2, 11, 10, 46, 27, 541310)}", "[State] 023850af-9a69-43be-abe2-9ae3b191cf56 {'id': '023850af-9a69-43be-abe2-9ae3b191cf56', 'created_at': datetime.datetime(2023, 2, 11, 10, 46, 43, 398415), 'updated_at': datetime.datetime(2023, 2, 11, 10, 46, 43, 398415)}", "[City] 333bc0cc-1a5a-4366-9b48-8b00c7d0183a {'id': '333bc0cc-1a5a-4366-9b48-8b00c7d0183a', 'created_at': datetime.datetime(2023, 2, 11, 10, 46, 54, 284694), 'updated_at': datetime.datetime(2023, 2, 11, 10, 46, 54, 284694)}", "[Review] 815da6cd-508c-4e62-8f5a-2741e6ebfb98 {'id': '815da6cd-508c-4e62-8f5a-2741e6ebfb98', 'created_at': datetime.datetime(2023, 2, 11, 10, 47, 3, 904086), 'updated_at': datetime.datetime(2023, 2, 11, 10, 47, 3, 904086)}", "[User] cf4f279b-9d5e-45d1-8d8a-50c0e893b0e7 {'id': 'cf4f279b-9d5e-45d1-8d8a-50c0e893b0e7', 'created_at': datetime.datetime(2023, 2, 11, 11, 16, 22, 566800), 'updated_at': datetime.datetime(2023, 2, 11, 11, 
+16, 22, 566800)}"]
+(hbnb)
+```  
+
+The `do_update` method updates an instance with new attributes, or creates a new attribute if it doesn't exist.  
+Example:  
+```
+(hbnb) update User cf4f279b-9d5e-45d1-8d8a-50c0e893b0e7 first_name John
+(hbnb) 
+```  
