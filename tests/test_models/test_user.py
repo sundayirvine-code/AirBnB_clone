@@ -46,7 +46,8 @@ class TestUser(unittest.TestCase):
         """
         instance = User()
         instance_string = instance.__str__()
-        test_string = f"[{instance.__class__.__name__}] {(instance.id)} {instance.__dict__}"
+        cls_name = instance.__class__.__name__
+        test_string = f"[{cls_name}] {(instance.id)} {instance.__dict__}"
         self.assertEqual(instance_string, test_string)
 
     def test_dictionary_representation(self):
@@ -97,4 +98,4 @@ class TestUser(unittest.TestCase):
 
 
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()
