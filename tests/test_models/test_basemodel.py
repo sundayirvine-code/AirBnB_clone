@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
 from models.base_model import BaseModel
 from models.__init__ import storage
 import unittest
 from datetime import datetime
 import time
+"""Tests class BaseModel"""
+
 
 class TestBaseModel(unittest.TestCase):
     def test_instance_creation(self):
@@ -50,7 +53,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(instance_dict["updated_at"], str)
         self.assertIsInstance(instance_dict["created_at"], str)
         self.assertEqual(instance_dict["__class__"], "BaseModel")
-        
+
     def test_instance_creation_with_kwargs(self):
         """
         Test that BaseModel creates an instance with kwargs
@@ -69,14 +72,13 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save_adds_to_storage(self):
         """
-        if the save method is adding the instance to the storage object. 
+        if the save method is adding the instance to the storage object.
         """
         instance = BaseModel()
         instance.save()
         key = f"{instance.__class__.__name__}.{instance.id}"
         self.assertIn(key, storage._FileStorage__objects)
         self.assertIs(storage._FileStorage__objects[key], instance)
-
 
 
 if __name__ == '__main__':

@@ -1,9 +1,12 @@
+#!/usr/bin/python3
 from models.base_model import BaseModel
+"""Defines the class Amenity"""
+
 
 class Amenity(BaseModel):
     """
     Class Amenity defines the amenities provided by the Place
-    
+
     Attributes:
         name (str): the name of the Amenity
     """
@@ -12,11 +15,10 @@ class Amenity(BaseModel):
     def __init__(self, *args, **kwargs):
         """
         Initializes the Amenity class and its attributes.
-        
         Args:
             *args: variable length argument list
             **kwargs: Arbitrary keyword arguments
-        
+
         Returns:
             None
         """

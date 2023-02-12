@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
 import unittest
 from datetime import datetime
 import time
 from models.place import Place
 from models.__init__ import storage
+"""Tests class Place"""
+
 
 class TestPlace(unittest.TestCase):
     def test_instance_creation(self):
@@ -72,16 +75,17 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(instance_dict["updated_at"], str)
         self.assertIsInstance(instance_dict["created_at"], str)
         self.assertEqual(instance_dict["__class__"], "Place")
-        
+
     def test_save_adds_to_storage(self):
         """
-        if the save method is adding the instance to the storage object. 
+        if the save method is adding the instance to the storage object.
         """
         instance = Place()
         instance.save()
         key = f"{instance.__class__.__name__}.{instance.id}"
         self.assertIn(key, storage._FileStorage__objects)
         self.assertIs(storage._FileStorage__objects[key], instance)
+
 
 if __name__ == '__main__':
     unittest.main()

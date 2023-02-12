@@ -1,7 +1,11 @@
+#!/usr/bin/env python3
 from models.base_model import BaseModel
+"""Defines a class State"""
+
 
 class State(BaseModel):
-    """The State class inherits from BaseModel and represents a State of the application.
+    """The State class inherits from BaseModel and represents
+       a State of the application.
 
     Attributes:
         name (str): The name of the state.
@@ -9,7 +13,8 @@ class State(BaseModel):
     name = ''
 
     def __init__(self, *args, **kwargs):
-        """This method initializes the State class and calls its parent's __init__ method.
+        """This method initializes the State class and calls its
+           parent's __init__ method.
 
         Args:
             *args: Arguments passed to the parent's __init__ method.

@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
 from models.base_model import BaseModel
+"""Defines a class User"""
+
 
 class User(BaseModel):
     """

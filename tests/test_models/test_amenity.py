@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
 import unittest
 from datetime import datetime
 import time
 from models.amenity import Amenity
 from models.__init__ import storage
+"""Tests class Amenity"""
+
 
 class TestAmenity(unittest.TestCase):
     def test_instance_creation(self):
@@ -37,7 +40,7 @@ class TestAmenity(unittest.TestCase):
         """
         instance = Amenity()
         instance_string = instance.__str__()
-        test_string = f"[{instance.__class__.__name__}] {(instance.id)} {instance.__dict__}"
+		test_string = f"[{instance.__class__.__name__}] {(instance.id)} {instance.__dict__}"
         self.assertEqual(instance_string, test_string)
 
     def test_dictionary_representation(self):
@@ -52,16 +55,17 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(instance_dict["updated_at"], str)
         self.assertIsInstance(instance_dict["created_at"], str)
         self.assertEqual(instance_dict["__class__"], "Amenity")
-        
+
     def test_save_adds_to_storage(self):
         """
-        if the save method is adding the instance to the storage object. 
+        if the save method is adding the instance to the storage object.
         """
         instance = Amenity()
         instance.save()
         key = f"{instance.__class__.__name__}.{instance.id}"
         self.assertIn(key, storage._FileStorage__objects)
         self.assertIs(storage._FileStorage__objects[key], instance)
+
 
 if __name__ == '__main__':
     unittest.main()

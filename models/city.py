@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
 from models.base_model import BaseModel
+"""Defines the class City"""
+
 
 class City(BaseModel):
     """City Class
@@ -21,6 +24,7 @@ class City(BaseModel):
 
         Args:
         *args: A list of arguments to be passed to the BaseModel class.
-        **kwargs: A dictionary of arguments to be passed to the BaseModel class.
+        **kwargs: A dictionary of arguments to be passed to the BaseModel
+          class.
         """
         super().__init__(*args, **kwargs)

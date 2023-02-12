@@ -1,15 +1,18 @@
+#!/usr/bin/env python3
 import unittest
 from datetime import datetime
 import time
 from models.user import User
 from models.__init__ import storage
+"""Tests for class User"""
+
 
 class TestUser(unittest.TestCase):
     def test_instance_creation(self):
         """
         Test that User creates an instance
         and that its attributes are of the correct type.
-        """       
+        """
         instance = User()
         self.assertIsInstance(instance, User)
         self.assertIsInstance(instance.created_at, datetime)
@@ -70,7 +73,7 @@ class TestUser(unittest.TestCase):
             'first_name': 'John',
             'last_name': 'Doe'
         }
-        instance = User(**key_value) 
+        instance = User(**key_value)
         self.assertIsInstance(instance, User)
         self.assertIsInstance(instance.email, str)
         self.assertIsInstance(instance.password, str)
@@ -83,7 +86,7 @@ class TestUser(unittest.TestCase):
 
     def test_save_adds_to_storage(self):
         """
-        if the save method is adding the instance to the storage object. 
+        if the save method is adding the instance to the storage object.
         """
         instance = User()
         instance.save()
@@ -92,5 +95,6 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(storage._FileStorage__objects[key], User)
         self.assertIs(storage._FileStorage__objects[key], instance)
 
+
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()

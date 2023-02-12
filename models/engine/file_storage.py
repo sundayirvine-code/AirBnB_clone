@@ -1,11 +1,13 @@
+#!/usr/bin/env python3
 import json
 import os
+"""Defines the class FileStorage"""
 
 
 class FileStorage:
     """Class for serializing and deserializing objects
     to and from a JSON file.
-    
+
     Attributes:
         __file_path (str): The file path where the JSON data will be stored.
         __objects (dict): A dictionary storing objects, with the keys being
@@ -50,9 +52,9 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to the __objects dictionary.
-        
-        If the file doesn't exist, this method does nothing and no
-        exception is raised.
+
+           If the file doesn't exist, this method does nothing and no
+           exception is raised.
 
         Returns:
             None
@@ -69,7 +71,7 @@ class FileStorage:
                 from models.city import City
                 from models.amenity import Amenity
                 from models.review import Review
-                
+
                 class_map = {
                     "BaseModel": BaseModel,
                     "User": User,
@@ -85,4 +87,3 @@ class FileStorage:
                     if class_name in class_map:
                         obj = class_map[class_name](**value)
                         FileStorage.__objects[key] = obj
-

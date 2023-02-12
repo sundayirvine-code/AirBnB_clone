@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
 import unittest
 from datetime import datetime
 import time
 from models.review import Review
 from models.__init__ import storage
+"""Tests for class Review"""
+
 
 class TestReview(unittest.TestCase):
     def test_instance_creation(self):
@@ -59,7 +62,7 @@ class TestReview(unittest.TestCase):
 
     def test_save_adds_to_storage(self):
         """
-        if the save method is adding the instance to the storage object. 
+        if the save method is adding the instance to the storage object.
         """
         instance = Review()
         instance.save()
