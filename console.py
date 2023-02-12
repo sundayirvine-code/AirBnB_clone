@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Script that implements a custom CLI for AirBnB project
+"""Script that implements a custom CLI for AirBnB project"""
 
 import cmd
 from models.base_model import BaseModel
