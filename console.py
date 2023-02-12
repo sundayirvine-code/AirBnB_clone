@@ -50,13 +50,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, class_name):
         """Create a new instance of the specified class and save it.
-Args:
-class_name (str): The name of the class to create an instance of.
+            Args:
+            class_name (str): The name of the class to create an instance of.
 
-Returns:
-None: If the class name is missing or does not exist.
-str: The instance id of the created object.
-"""
+            Returns:
+            None: If the class name is missing or does not exist.
+            str: The instance id of the created object.
+        """
         if not class_name:
             print('** class name missing **')
 
@@ -71,14 +71,14 @@ str: The instance id of the created object.
     def do_show(self, line):
         """Display string representation of an instance
            based on the class name and id.
-Args:
-line (str): A string with class name and id separated by a space.
+            Args:
+            line (str): A string with class name and id separated by a space.
 
-Returns:
-None: If class name or instance id is missing, or class
-doesn't exist, or instance is not found.
-str: The string representation of the instance.
-"""
+            Returns:
+            None: If class name or instance id is missing, or class
+            doesn't exist, or instance is not found.
+            str: The string representation of the instance.
+        """
 
         args = shlex.split(line)
         class_name, id = (args + [None, None])[:2]
@@ -106,14 +106,14 @@ str: The string representation of the instance.
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id
-Args:
-line (str): The class name and id separated by a space.
+            Args:
+            line (str): The class name and id separated by a space.
 
-Returns:
-None: If class name is missing or class doesn't exist or
-instance id is missing or instance not found.
-None: Deletes the instance and saves the change in the JSON file.
-"""
+            Returns:
+            None: If class name is missing or class doesn't exist or
+            instance id is missing or instance not found.
+            None: Deletes the instance and saves the change in the JSON file.
+        """
         args = shlex.split(line)
         # add each argument to the begining
         # of the list and pick the first two
@@ -147,15 +147,15 @@ None: Deletes the instance and saves the change in the JSON file.
         """Prints all string representations of all instances,
            filtered by class name if provided.
 
-Args:
-line (str): A string that may contain the name of a class to
-filter the instances by.
+            Args:
+            line (str): A string that may contain the name of a class to
+            filter the instances by.
 
-Returns:
-None: If the class name is missing or does not exist.
-List[str]: A list of string representations of all instances that
-match the class name, or all instances if no class name is provided.
-"""
+            Returns:
+            None: If the class name is missing or does not exist.
+            List[str]: A list of str rep. of all instances that match
+            the class name, or all instances if no class name is provided.
+        """
         args = shlex.split(line)
         class_name = (args + [None])[0]
 
@@ -189,15 +189,15 @@ match the class name, or all instances if no class name is provided.
     def do_update(self, line):
         """Updates an instance based on the class name and id
            by adding or updating attribute.
-Args:
-line (str): The input line containing the parameters for the update command.
+            Args:
+            line (str): contains the parameters for the update command.
 
-Returns:
-None
+            Returns:
+            None
 
-Raises:
-None
-"""
+            Raises:
+            None
+        """
         args = shlex.split(line)
         argc = len(args)
         class_name, id, attribute_name, attribute_value =\
