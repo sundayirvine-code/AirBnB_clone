@@ -40,7 +40,7 @@ class TestAmenity(unittest.TestCase):
         """
         instance = Amenity()
         instance_string = instance.__str__()
-		test_string = f"[{instance.__class__.__name__}] {(instance.id)} {instance.__dict__}"
+        test_string = f"[{instance.__class__.__name__}] {(instance.id)} {instance.__dict__}"
         self.assertEqual(instance_string, test_string)
 
     def test_dictionary_representation(self):
