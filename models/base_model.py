@@ -1,6 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 import uuid
 from datetime import datetime
+import models
 """Defines the class BaseModel"""
 
 
@@ -43,8 +44,7 @@ class BaseModel:
             now = (datetime.now())
             self.created_at = now
             self.updated_at = now
-            from models.__init__ import storage
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Returns a string representation of the object.
