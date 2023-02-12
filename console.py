@@ -11,6 +11,7 @@ from models.amenity import Amenity
 from models.review import Review
 from models.__init__ import storage
 import shlex
+import re
 
 class_map = {
     'BaseModel': BaseModel,
@@ -37,11 +38,6 @@ class HBNBCommand(cmd.Cmd):
         """Exit the command-line interface.
         """
         return True
-
-    def default(self, line):
-        """Handle unknown commands.
-        """
-        print("Unknown command:", line)
 
     def emptyline(self):
         """Do not execute anything when an empty line is inputted.
@@ -246,6 +242,46 @@ class HBNBCommand(cmd.Cmd):
             # creating new attribute
             setattr(obj, attribute_name, attribute_value)
             storage.save()
+
+    def default(self, line):
+        """Handle unknown commands.
+        """
+        args = shlex.split(line)
+        arg1 = args[0]
+        class_name, command = arg1.split('.')
+        if class_name in class_map:
+            if command == "all()":
+                # Call the all command
+                HBNBCommand.do_all(self, class_name)
+            elif command == "count()":
+                all_objs = storage.all()
+                class_objects = [
+                    value.__str__() for key, value in all_objs.items()
+                    if key.startswith(f"{class_name}.")
+                ]
+                print(len(class_objects))
+            elif command.startswith("show"):
+                # Retrieve the Id
+                pattern = r'\((.*?)\)'
+                match = re.search(pattern, command)
+                id = match.group(1)
+
+                # Call the show command
+                HBNBCommand.do_show(self, f"{class_name} {id}")
+
+            elif command.startswith("destroy"):
+                # Retrieve the Id
+                pattern = r'\((.*?)\)'
+                match = re.search(pattern, command)
+                id = match.group(1)
+
+                # Call the show command
+                HBNBCommand.do_destroy(self, f"{class_name} {id}")
+            else:
+                print("Unknown command:", line)
+        else:
+            print("Unknown command:", line)
+            return
 
 
 if __name__ == '__main__':
