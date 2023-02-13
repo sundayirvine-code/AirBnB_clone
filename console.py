@@ -286,7 +286,6 @@ class HBNBCommand(cmd.Cmd):
                     try:
                         # print('dictionary update')
                         id, dictionary = match.group(1).split(',', 1)
-                        print(dictionary)
                         dictionary = ast.literal_eval(dictionary)
                         for key, value in dictionary.items():
                             s = f"{class_name} {id} {key} {value}"
