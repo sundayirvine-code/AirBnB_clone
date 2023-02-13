@@ -290,7 +290,7 @@ class HBNBCommand(cmd.Cmd):
                         for key, value in dictionary.items():
                             s = f"{class_name} {id} {key} {value}"
                             HBNBCommand.do_update(self, s)
-                    except:
+                    except ValueError:
                         # print('simple Update')
                         id, attribute, value = match.group(1).split(',')
                         s = f"{class_name} {id} {attribute} {value}"
