@@ -246,9 +246,9 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """Handle unknown commands.
         """
-        args = shlex.split(line)
-        arg1 = args[0]
-        class_name, command = arg1.split('.')
+        class_name, command = line.split('.')
+        '''print(class_name, command)
+        print()'''
         if class_name in class_map:
             if command == "all()":
                 # Call the all command
@@ -277,6 +277,13 @@ class HBNBCommand(cmd.Cmd):
 
                 # Call the show command
                 HBNBCommand.do_destroy(self, f"{class_name} {id}")
+            
+            elif command.startswith("update"):
+                pattern = r'\((.*?)\)'
+                match = re.search(pattern, command)
+                id, attribute, value = match.group(1).split(',')
+                #print(id, attribute, value)
+                HBNBCommand.do_update(self, f"{class_name} {id} {attribute} {value}")
             else:
                 print("Unknown command:", line)
         else:
