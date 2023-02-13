@@ -286,13 +286,18 @@ class HBNBCommand(cmd.Cmd):
                     try:
                         # print('dictionary update')
                         id, dictionary = match.group(1).split(',', 1)
+                        id.strip()
+                        dictionary.strip()
                         dictionary = ast.literal_eval(dictionary)
                         for key, value in dictionary.items():
                             s = f"{class_name} {id} {key} {value}"
                             HBNBCommand.do_update(self, s)
-                    except ValueError:
+                    except AttributeError:
                         # print('simple Update')
                         id, attribute, value = match.group(1).split(',')
+                        id.strip()
+                        attribute.strip()
+                        value.strip()
                         s = f"{class_name} {id} {attribute} {value}"
                         HBNBCommand.do_update(self, s)
 
