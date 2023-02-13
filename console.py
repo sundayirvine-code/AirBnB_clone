@@ -281,14 +281,14 @@ class HBNBCommand(cmd.Cmd):
                 pattern = r'\((.*?)\)'
                 match = re.search(pattern, command)
 
-                if '{' not in command:
+                try:
                     # print('simple Update')
                     id, attribute, value = match.group(1).split(',')
                     s = f"{class_name} {id} {attribute} {value}"
                     HBNBCommand.do_update(self, s)
 
                 # Updating with dictionary
-                else:
+                except ValueError:
                     # print('dictionary update')
                     id, dictionary = match.group(1).split(',', 1)
                     dictionary = ast.literal_eval(dictionary)
