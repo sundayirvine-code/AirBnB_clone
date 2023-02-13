@@ -196,10 +196,11 @@ class HBNBCommand(cmd.Cmd):
             None
         """
         args = shlex.split(line)
+        print(args)
         argc = len(args)
         class_name, id, attribute_name, attribute_value =\
             (args + [None, None, None, None])[:4]
-
+        print(class_name, id, attribute_name, attribute_value)
         if not class_name:
             print("** class name missing **")
             return
@@ -282,17 +283,21 @@ class HBNBCommand(cmd.Cmd):
                 match = re.search(pattern, command)
 
                 if '{' not in command:
+                    # print('simple Update')
                     id, attribute, value = match.group(1).split(',')
-                    HBNBCommand.do_update
-                    (self, f"{class_name} {id} {attribute} {value}")
+                    s = f"{class_name} {id} {attribute} {value}"
+                    HBNBCommand.do_update(self, s)
+                    print('called simple update')
 
                 # Updating with dictionary
                 else:
+                    # print('dictionary update')
                     id, dictionary = match.group(1).split(',', 1)
                     dictionary = ast.literal_eval(dictionary)
                     for key, value in dictionary.items():
-                        HBNBCommand.do_update
-                        (self, f"{class_name} {id} {key} {value}")
+                        s = f"{class_name} {id} {key} {value}"
+                        HBNBCommand.do_update(self, s)
+                        print('called dict update')
 
             else:
                 print("Unknown command:", line)
