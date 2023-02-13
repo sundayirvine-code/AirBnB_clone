@@ -247,58 +247,62 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """Handle unknown commands.
         """
-        class_name, command = line.split('.')
-        if class_name in class_map:
-            if command == "all()":
-                # Call the all command
-                HBNBCommand.do_all(self, class_name)
-            elif command == "count()":
-                all_objs = storage.all()
-                class_objects = [
-                    value.__str__() for key, value in all_objs.items()
-                    if key.startswith(f"{class_name}.")
-                ]
-                print(len(class_objects))
-            elif command.startswith("show"):
-                # Retrieve the Id
-                pattern = r'\((.*?)\)'
-                match = re.search(pattern, command)
-                id = match.group(1)
+        try:
+            class_name, command = line.split('.')
+            if class_name in class_map:
+                if command == "all()":
+                    # Call the all command
+                    HBNBCommand.do_all(self, class_name)
+                elif command == "count()":
+                    all_objs = storage.all()
+                    class_objects = [
+                        value.__str__() for key, value in all_objs.items()
+                        if key.startswith(f"{class_name}.")
+                    ]
+                    print(len(class_objects))
+                elif command.startswith("show"):
+                    # Retrieve the Id
+                    pattern = r'\((.*?)\)'
+                    match = re.search(pattern, command)
+                    id = match.group(1)
 
-                # Call the show command
-                HBNBCommand.do_show(self, f"{class_name} {id}")
+                    # Call the show command
+                    HBNBCommand.do_show(self, f"{class_name} {id}")
 
-            elif command.startswith("destroy"):
-                # Retrieve the Id
-                pattern = r'\((.*?)\)'
-                match = re.search(pattern, command)
-                id = match.group(1)
+                elif command.startswith("destroy"):
+                    # Retrieve the Id
+                    pattern = r'\((.*?)\)'
+                    match = re.search(pattern, command)
+                    id = match.group(1)
 
-                # Call the show command
-                HBNBCommand.do_destroy(self, f"{class_name} {id}")
+                    # Call the show command
+                    HBNBCommand.do_destroy(self, f"{class_name} {id}")
 
-            elif command.startswith("update"):
-                pattern = r'\((.*?)\)'
-                match = re.search(pattern, command)
+                elif command.startswith("update"):
+                    pattern = r'\((.*?)\)'
+                    match = re.search(pattern, command)
 
-                try:
-                    # print('simple Update')
-                    id, attribute, value = match.group(1).split(',')
-                    s = f"{class_name} {id} {attribute} {value}"
-                    HBNBCommand.do_update(self, s)
-
-                # Updating with dictionary
-                except ValueError:
-                    # print('dictionary update')
-                    id, dictionary = match.group(1).split(',', 1)
-                    dictionary = ast.literal_eval(dictionary)
-                    for key, value in dictionary.items():
-                        s = f"{class_name} {id} {key} {value}"
+                    # Updating with dictionary
+                    try:
+                        # print('dictionary update')
+                        id, dictionary = match.group(1).split(',', 1)
+                        print(dictionary)
+                        dictionary = ast.literal_eval(dictionary)
+                        for key, value in dictionary.items():
+                            s = f"{class_name} {id} {key} {value}"
+                            HBNBCommand.do_update(self, s)
+                    except:
+                        # print('simple Update')
+                        id, attribute, value = match.group(1).split(',')
+                        s = f"{class_name} {id} {attribute} {value}"
                         HBNBCommand.do_update(self, s)
 
+                else:
+                    print("Unknown command:", line)
             else:
                 print("Unknown command:", line)
-        else:
+                return
+        except ValueError:
             print("Unknown command:", line)
             return
 
