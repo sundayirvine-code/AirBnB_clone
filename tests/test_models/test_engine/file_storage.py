@@ -65,5 +65,6 @@ class TestFileStorage(unittest.TestCase):
         # check reload() output
         self.assertTrue(dict1 is fs1.reload())
 
+
 if __name__ == '__main__':
     unittest.main()

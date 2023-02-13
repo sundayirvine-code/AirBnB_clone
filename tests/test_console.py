@@ -35,7 +35,7 @@ class TestConsole(unittest.TestCase):
         """ Removes the JSON file """
         try:
             os.remove("file.json")
-        except:
+        except FileNotFoundError:
             pass
 
     def test_docstrings(self):

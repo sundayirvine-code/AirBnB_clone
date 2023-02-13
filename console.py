@@ -12,6 +12,7 @@ from models.review import Review
 from models.__init__ import storage
 import shlex
 import re
+import ast
 
 class_map = {
     'BaseModel': BaseModel,
@@ -247,8 +248,6 @@ class HBNBCommand(cmd.Cmd):
         """Handle unknown commands.
         """
         class_name, command = line.split('.')
-        '''print(class_name, command)
-        print()'''
         if class_name in class_map:
             if command == "all()":
                 # Call the all command
@@ -277,13 +276,24 @@ class HBNBCommand(cmd.Cmd):
 
                 # Call the show command
                 HBNBCommand.do_destroy(self, f"{class_name} {id}")
-            
+
             elif command.startswith("update"):
                 pattern = r'\((.*?)\)'
                 match = re.search(pattern, command)
-                id, attribute, value = match.group(1).split(',')
-                #print(id, attribute, value)
-                HBNBCommand.do_update(self, f"{class_name} {id} {attribute} {value}")
+
+                if '{' not in command:
+                    id, attribute, value = match.group(1).split(',')
+                    HBNBCommand.do_update
+                    (self, f"{class_name} {id} {attribute} {value}")
+
+                # Updating with dictionary
+                else:
+                    id, dictionary = match.group(1).split(',', 1)
+                    dictionary = ast.literal_eval(dictionary)
+                    for key, value in dictionary.items():
+                        HBNBCommand.do_update
+                        (self, f"{class_name} {id} {key} {value}")
+
             else:
                 print("Unknown command:", line)
         else:
