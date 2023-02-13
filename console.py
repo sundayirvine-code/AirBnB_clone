@@ -196,11 +196,10 @@ class HBNBCommand(cmd.Cmd):
             None
         """
         args = shlex.split(line)
-        print(args)
         argc = len(args)
         class_name, id, attribute_name, attribute_value =\
             (args + [None, None, None, None])[:4]
-        print(class_name, id, attribute_name, attribute_value)
+
         if not class_name:
             print("** class name missing **")
             return
@@ -287,7 +286,6 @@ class HBNBCommand(cmd.Cmd):
                     id, attribute, value = match.group(1).split(',')
                     s = f"{class_name} {id} {attribute} {value}"
                     HBNBCommand.do_update(self, s)
-                    print('called simple update')
 
                 # Updating with dictionary
                 else:
@@ -297,7 +295,6 @@ class HBNBCommand(cmd.Cmd):
                     for key, value in dictionary.items():
                         s = f"{class_name} {id} {key} {value}"
                         HBNBCommand.do_update(self, s)
-                        print('called dict update')
 
             else:
                 print("Unknown command:", line)
