@@ -12,7 +12,6 @@ from models.review import Review
 from models.__init__ import storage
 import shlex
 import re
-import ast
 
 class_map = {
     'BaseModel': BaseModel,
@@ -280,23 +279,11 @@ class HBNBCommand(cmd.Cmd):
                 HBNBCommand.do_destroy(self, f"{class_name} {id}")
 
             elif command.startswith("update"):
-                regex1 = r'User\.update\((.*), (.*), (.*)\)'
-                regex2 = r'User\.update\((.*), (\{.*\})\)'
-                if re.match(regex2, line):
-                    match = re.match(regex2, line)
-                    id = match.group(1)
-                    dictionary = match.group(2)
-                    dictionary = ast.literal_eval(dictionary)
-                    for key, value in dictionary.items():
-                        s = f"{class_name} {id} {key} {value}"
-                        HBNBCommand.do_update(self, s)
-                else:
-                    match = re.match(regex1, line)
-                    id = match.group(1)
-                    attribute = match.group(2)
-                    value = match.group(3)
-                    s = f"{class_name} {id} {attribute} {value}"
-                    HBNBCommand.do_update(self, s)
+                pattern = r'\((.*?)\)'
+                match = re.search(pattern, command)
+                id, attribute, value = match.group(1).split(',')
+                s = f"{class_name} {id} {attribute} {value}"
+                HBNBCommand.do_update(self, s)
             else:
                 print("Unknown command:", line)
         else:
