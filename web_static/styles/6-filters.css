@@ -30,7 +30,9 @@
 .locations{
     height: 100%;
     width: 25%;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items:center;
 }
 
 .locations{
@@ -41,16 +43,12 @@
 .amenities > h3{
     font-weight: 600;
     padding-top: 10px;
-    margin: 0 auto;
-    padding-left: 15px;
 }
 
 .locations > h4,
 .amenities > h4{
     font-weight: 400;
     font-size: 14px;
-    margin: 0 auto;
-    padding-left: 15px;
 }
 
 .locations > .popover,

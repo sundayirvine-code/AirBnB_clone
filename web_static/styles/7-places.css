@@ -1,7 +1,5 @@
-.places{
-    border: 1px solid green;
-}
 .places h1{
+    text-align: left;
     font-size: 30px;
     position: relative;
     left: 0;
