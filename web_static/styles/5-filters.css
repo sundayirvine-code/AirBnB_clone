@@ -57,3 +57,9 @@ opacity: 0.9;
     padding-top: 5px;
     margin-bottom: 14.8px;
 }
+
+.locations > h4 p,
+.amenities > h4 p{
+    margin: 0;
+    padding: 0;
+}
