@@ -1,4 +1,4 @@
-*{
+body{
     margin: 0px;
     padding: 0px;
     color: #484848;
@@ -6,8 +6,7 @@
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
     box-sizing: border-box;
 }
-
-.container{
+.container {
     max-width: 1000px;
-    margin: 30px auto; /*auto left and right centers div horizontally*/
-}
+    margin: 30px auto;
+  }
