@@ -1,14 +1,14 @@
 header{
-    color: white;
+    background-color: #FFFFFF;
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
-    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-header > object{
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+header .logo{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
 }
