@@ -9,5 +9,6 @@
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true,
     "python.linting.pycodestyleEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "liveServer.settings.port": 5501
 }
