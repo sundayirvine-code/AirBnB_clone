@@ -85,10 +85,12 @@
 
 .amenities ul{
     list-style-type: none;
+    padding: 0;
 }
 
 .amenities ul li{
     margin-bottom: 10px;
+    
 }
 
 .reviews{
@@ -103,7 +105,10 @@
 
 .reviews ul{
     list-style-type: none;
+    padding: 0;
 }
+
+
 
 .reviews ul li h3{
     font-size: 14px;
